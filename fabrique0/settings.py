@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,12 +21,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wvyb5=68s@ad5q8i*!xck*)^e5g&*2!0e0j3la_z6j_!!va%wu'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','wvyb5=68s@ad5q8i*!xck*)^e5g&*2!0e0j3la_z6j_!!va%wu')
+#SECRET_KEY = os.environ['SECRET_KEY']
+# with open('/etc/secret_key.txt') as f:
+'''cwd = os.getcwd()
+keypath = '/etc/secret_key.txt'
+with open(os.path.join(cwd, keypath)) as f:
+    SECRET_KEY = f.read().strip()'''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'www.codevacyacode-fabrique0.herokuapp.com',
+]
 
 
 # Application definition
@@ -40,11 +50,13 @@ INSTALLED_APPS = [
     'psycopg2',
     'rest_framework',
     'corsheaders',
+    'django_heroku',
     'polls.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,4 +138,83 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = 'var/www/codevacyacode-fabrique0.herokuapp.com/static'
 STATIC_URL = '/static/'
+
+ADMINS = [
+    ('Admin', 'kolesnikovasiliy@yandex.ru')
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'cache0',
+    },
+    'special': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'cache1',
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s: %(message)s',
+            'datefmt': '%Y.%m.%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'console_dev': {
+            'class': 'logging.StreamHadler',
+            'formatter': 'simple',
+            'filters': ['require_debug_true'],
+        },
+        'console_prod': {
+            'class': 'logging.StreamHadler',
+            'formatter': 'simple',
+            'filters': ['require_debug_false'],
+        },
+        'file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'D:/django-site.log',
+            'maxBytes': 1048576,
+            'backupCount': 10,
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console_dev', 'console_prod'],
+        },
+        'django_server': {
+            'handlers': {
+                'handlers': ['file'],
+                'level': 'INFO',
+                'propagate': True,
+            },
+        },
+    },
+    'disable_existing_loggers': True,
+}
+
+CSRF_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 60
+SECURE_SSL_REDIRECT = True
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
