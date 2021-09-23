@@ -22,15 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','wvyb5=68s@ad5q8i*!xck*)^e5g&*2!0e0j3la_z6j_!!va%wu')
-#SECRET_KEY = os.environ['SECRET_KEY']
-# with open('/etc/secret_key.txt') as f:
-'''cwd = os.getcwd()
-keypath = '/etc/secret_key.txt'
-with open(os.path.join(cwd, keypath)) as f:
-    SECRET_KEY = f.read().strip()'''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = [
