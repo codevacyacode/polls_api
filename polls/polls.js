@@ -1,4 +1,4 @@
-var domain = 'http://localhost:8000/'
+var domain = 'https://murmuring-depths-65428.herokuapp.com/'
 
 window.onload = function() {
 	var list = document.getElementById('list');

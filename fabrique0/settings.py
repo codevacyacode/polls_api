@@ -133,7 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = 'var/www/codevacyacode-fabrique0.herokuapp.com/static'
+STATIC_ROOT = 'var/www/murmuring-depths-65428.herokuapp.com/static'
 STATIC_URL = '/static/'
 
 ADMINS = [
