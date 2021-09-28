@@ -10,7 +10,7 @@ window.onload = function() {
 				var data = JSON.parse(pollListLoader.responseText);
 				var s = '<ul>';
 				for (i = 0; i < data.length; i++) {
-					s += '<li>' + data[i].name + '</li>;
+					s += '<li>' + data[i].name + '</li>';
 				}
 				s += '</ul>'
 				list.innerHTML = s;
@@ -19,7 +19,7 @@ window.onload = function() {
 	}
 	
 	function pollListLoad() {
-		pollListLoader.open('GET', domain + 'polls/api/polls/', true);
+		pollListLoader.open('GET', domain + 'api/polls/', true);
 		pollListLoader.send();
 	}
 	

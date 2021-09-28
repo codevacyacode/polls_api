@@ -29,6 +29,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = [
     '.murmuring-depths-65428.herokuapp.com',
+    'murmuring-depths-65428.herokuapp.com'
 ]
 
 
@@ -86,14 +87,7 @@ WSGI_APPLICATION = 'fabrique0.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgres://fkhfqwiratukcx:093efbbd841726301e330a32246f8e7f1d261e6374d2c4a3b4732cbaab9c35ba@ec2-34-197-135-44.compute-1.amazonaws.com:5432/dfkd9s493hc706'),
 }
 
 
