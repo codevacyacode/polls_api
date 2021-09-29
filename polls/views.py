@@ -9,6 +9,6 @@ from .serializers import PollSerializer
 @api_view(['GET'])
 def api_polls(request):
     if request.method == 'GET':
-        polls = Poll.objects.all()
-        serializer = PollSerializer(polls, many = True)
+        thepolls = Poll.objects.all()
+        serializer = PollSerializer(thepolls, many = True)
         return Response(serializer.data)
