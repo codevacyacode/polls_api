@@ -11,18 +11,28 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import django_heroku
-import os
 import dj_database_url
+import environ
+import os
+
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','wvyb5=68s@ad5q8i*!xck*)^e5g&*2!0e0j3la_z6j_!!va%wu')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
@@ -87,7 +97,7 @@ WSGI_APPLICATION = 'fabrique0.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://fkhfqwiratukcx:093efbbd841726301e330a32246f8e7f1d261e6374d2c4a3b4732cbaab9c35ba@ec2-34-197-135-44.compute-1.amazonaws.com:5432/dfkd9s493hc706'),
+    'default': env.db(),
 }
 
 
