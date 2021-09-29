@@ -1,4 +1,4 @@
-var domain = 'https://murmuring-depths-65428.herokuapp.com/'
+var domain = 'https://murmuring-depths-65428.herokuapp.com/polls/'
 
 window.onload = function() {
 	var list = document.getElementById('list');
@@ -10,7 +10,7 @@ window.onload = function() {
 				var data = JSON.parse(pollListLoader.responseText);
 				var s = '<ul>';
 				for (i = 0; i < data.length; i++) {
-					s += '<li>' + data[i].name + '</li>';
+					s += '<li>' + data[i].title + '</li>';
 				}
 				s += '</ul>'
 				list.innerHTML = s;
