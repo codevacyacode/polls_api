@@ -1,6 +1,7 @@
 from django.urls import path, include
-from .views import api_polls
+from .views import index, api_polls
 
 urlpatterns = [
-	path('api/polls/', api_polls),
+	path('', index),
+    path('api/polls/', api_polls),
 ]
