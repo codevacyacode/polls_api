@@ -4,4 +4,4 @@ from .models import Poll
 class PollSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Poll
-		fields = ('id', 'title', 'date_a', 'date_b', 'description')
+		fields = ('title', 'date_a', 'date_b', 'description')
