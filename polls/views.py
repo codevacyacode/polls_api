@@ -33,7 +33,7 @@ def api_answers(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = AnswerSerializer(data = request.data)
-        serializer.data['user'] = request.session.session_key
+        serializer.data['respondent'] = request.session.session_key
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
