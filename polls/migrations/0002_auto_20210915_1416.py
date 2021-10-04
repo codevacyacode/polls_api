@@ -11,30 +11,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='question',
-            name='option0',
-            field=models.CharField(default='Да', max_length=64, verbose_name='Вариант ответа А'),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='question',
-            name='option1',
-            field=models.CharField(default='Нет', max_length=64, verbose_name='Вариант ответа Б'),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='question',
-            name='option2',
-            field=models.CharField(default='Возможно', max_length=64, verbose_name='Вариант ответа В'),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='question',
-            name='option3',
-            field=models.CharField(default='Затрудняюсь ответить', max_length=64, verbose_name='Вариант ответа Г'),
-            preserve_default=False,
-        ),
         migrations.AlterField(
             model_name='poll',
             name='date_a',
