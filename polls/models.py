@@ -40,7 +40,7 @@ class Question(models.Model):
         
 class Answer(models.Model):
     user = models.CharField(max_length = 32, verbose_name = 'Пользователь')
-    poll = models.ForeignKey(Poll, on_delete = models.CASCADE, verbose_name = 'Опрос')
+    # poll = models.ForeignKey(Poll, on_delete = models.CASCADE, verbose_name = 'Опрос')
     question = models.ForeignKey(Question, on_delete = models.CASCADE, verbose_name = 'Вопрос')
     choice = models.CharField(max_length = 64, verbose_name = 'Выбранный вариант')
     
