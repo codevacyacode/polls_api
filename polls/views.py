@@ -32,11 +32,25 @@ def api_answers(request):
         serializer = AnswerSerializer(answers, many = True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = AnswerSerializer(data = request.data)
-        serializer.data['respondent'] = request.session.session_key
+        str_choice = ''.join(request.data['choice'])
+        my_data = {
+            'respondent': request.session.session_key,
+            'question': request.data['question'],
+            'choice': str_choice
+        }
+        serializer = AnswerSerializer(data = my_data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, 
             status = status.HTTP_400_BAD_REQUEST)
+            
+@api_view(['GET'])
+def api_whole_poll(request, pk):
+    # Получить все вопросы, указав id нужного опроса
+    if request.method == 'GET':
+        questions =  Question.objects.filter(poll = pk)
+        serializer = QuestionSerializer(questions)
+        return Response(serializer.data)
+        

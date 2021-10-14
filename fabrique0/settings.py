@@ -144,7 +144,7 @@ STATIC_ROOT = 'var/www/murmuring-depths-65428.herokuapp.com/static'
 STATIC_URL = '/static/'
 
 ADMINS = [
-    ('Admin', 'kolesnikovasiliy@yandex.ru')
+    ('Admin', env('MAIL'))
 ]
 
 CACHES = {
@@ -209,7 +209,6 @@ LOGGING = {
 }
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
