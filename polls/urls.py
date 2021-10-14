@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import index, api_polls
+from .views import index, api_polls, api_questions, api_answers
 
 urlpatterns = [
 	path('', index),
