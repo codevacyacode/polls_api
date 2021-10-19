@@ -208,6 +208,15 @@ LOGGING = {
     'disable_existing_loggers': True,
 }
 
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'https://vote-4-vacya.herokuapp.com',
+] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'https://vote-4-vacya.herokuap.com',
+]
+
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
