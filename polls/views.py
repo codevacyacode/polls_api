@@ -25,7 +25,7 @@ def api_questions(request):
         serializer = QuestionSerializer(questions, many = True)
         return Response(serializer.data)
         
-@api_view(['GET, POST'])
+@api_view(['GET', 'POST'])
 def api_answers(request):
     if request.method == 'GET':
         answers = Answer.objects.all()
