@@ -34,7 +34,7 @@ def api_answers(request):
     elif request.method == 'POST':
         str_choice = ''.join(request.data['choice'])
         my_data = {
-            'respondent': request.session.session_key,
+            # 'respondent': request.session.session_key,
             'question': request.data['question'],
             'choice': str_choice
         }
