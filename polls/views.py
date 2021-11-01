@@ -33,6 +33,8 @@ def api_answers(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         str_choice = '; '.join(request.data['choice'])
+        if not request.session.session_key:
+            request.session.create()
         my_data = [{
             'respondent': request.session.session_key,
             'question': request.data['question'],
