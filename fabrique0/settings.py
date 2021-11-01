@@ -38,7 +38,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = [
-    '*'
+    'murmuring-depths-65428.herokuapp.com',
+    'vote-4-vacya.herokuapp.com'
 ]
 
 
@@ -214,19 +215,19 @@ CORS_ORIGIN_WHITELIST = [
     'https://vote-4-vacya.herokuapp.com',
 ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
 CORS_ORIGIN_REGEX_WHITELIST = [
-    'https://vote-4-vacya.herokuap.com',
+    'https://vote-4-vacya.herokuap.com\w+',
 ]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
+CSRF_COOKIE_SECURE = False # Сookie передаются только по https
+SECURE_BROWSER_XSS_FILTER = False
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SESSION_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
+SESSION_COOKIE_SECURE = True # Сookie передаются только по https
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS = 60
-SECURE_SSL_REDIRECT = False # С бесплатным heroku нельзя настраивать SSL
+SECURE_HSTS_SECONDS = 60 # Минимальный интервал в сек для запросов по http
+SECURE_SSL_REDIRECT = True
 
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require = True)
