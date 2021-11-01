@@ -32,7 +32,7 @@ def api_answers(request):
         serializer = AnswerSerializer(answers, many = True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        str_choice = ''.join(request.data['choice'])
+        str_choice = '; '.join(request.data['choice'])
         my_data = {
             'respondent': request.session.session_key,
             'question': request.data['question'],
