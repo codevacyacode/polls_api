@@ -217,6 +217,10 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ORIGIN_REGEX_WHITELIST = [
     'https://vote-4-vacya.herokuap.com\w+',
 ]
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 CSRF_COOKIE_SECURE = False # Сookie передаются только по https
