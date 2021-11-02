@@ -38,8 +38,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = [
-    'murmuring-depths-65428.herokuapp.com',
-    'vote-4-vacya.herokuapp.com'
+    '*'
 ]
 
 
