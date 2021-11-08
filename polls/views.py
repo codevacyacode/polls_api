@@ -35,11 +35,11 @@ def api_answers(request):
         str_choice = '; '.join(request.data['thechoice'])
         if not request.session.session_key:
             request.session.create()
-        my_data = [{
+        my_data = {
             'respondent': request.session.session_key,
             'question': request.data['thequestion'],
             'choice': str_choice
-        }]
+        }
         serializer = AnswerSerializer(data = my_data)
         if serializer.is_valid():
             serializer.save()
