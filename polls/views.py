@@ -53,6 +53,6 @@ def api_whole_poll(request, pk):
     # Получить все вопросы, указав id нужного опроса
     if request.method == 'GET':
         questions =  Question.objects.filter(poll = pk)
-        serializer = QuestionSerializer(questions)
+        serializer = QuestionSerializer(questions, many = True)
         return Response(serializer.data)
         
