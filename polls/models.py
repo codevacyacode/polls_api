@@ -39,7 +39,7 @@ class Question(models.Model):
         ordering = ['-poll']
         
 class Answer(models.Model):
-    respondent = models.CharField(max_length = 255, verbose_name = 'Пользователь')
+    respondent = models.CharField(max_length = 64, verbose_name = 'Пользователь')
     question = models.ForeignKey(Question, on_delete = models.CASCADE, verbose_name = 'Вопрос')
     choice = models.CharField(max_length = 255, verbose_name = 'Выбранный вариант')
     
