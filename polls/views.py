@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Poll, Question, Answer
 from .serializers import PollSerializer, QuestionSerializer, AnswerSerializer
+from datetime import date
 
 # Create your views here.
 
@@ -15,6 +16,14 @@ def index(request):
 def api_polls(request):
     if request.method == 'GET':
         thepolls = Poll.objects.all()
+        serializer = PollSerializer(thepolls, many = True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def api_active_polls(request):
+    if request.method == 'GET':
+        thepolls = Poll.objects.filter(date_a__lte = datetime.date.today(), 
+        date_b__gt = datetime.date.today())
         serializer = PollSerializer(thepolls, many = True)
         return Response(serializer.data)
         
@@ -55,4 +64,26 @@ def api_whole_poll(request, pk):
         questions =  Question.objects.filter(poll = pk)
         serializer = QuestionSerializer(questions, many = True)
         return Response(serializer.data)
-        
+
+@api_view(['GET'])
+def api_poll_answers(request, pk):
+    # Получить все ответы по номеру опроса
+    if request.method == 'GET':
+        our_questions = [] # Список id вопросов нужного опроса
+        for question in Question.objects.filter(poll = pk):
+            our_questions.append(question.id)
+        answers = []
+        for oq in our_questions:
+            for a in Answer.objects.filter(question = oq):
+                answers.append(a)
+        serializer = AnswerSerializer(answers, many = True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def api_user(request, person):
+    # Получить все ответы пользователя
+    if request.method == 'GET':
+        answers = Answer.objects.filter(respondent = person)
+        serializer = AnswerSerializer(answers, many = True)
+        return Response(serializer.data)
